@@ -16,7 +16,7 @@ class ChatProvider extends ChangeNotifier {
     if (text.endsWith('?')) {
       herReply();
     }
-    modeScrollToBotton();
+    moveScrollToBottom();
     notifyListeners();
   }
 
@@ -24,10 +24,12 @@ class ChatProvider extends ChangeNotifier {
     final herMessage = await geyYesNoAnswer.getAnswer();
     messageList.add(herMessage);
     notifyListeners();
-    modeScrollToBotton();
+    moveScrollToBottom();
   }
 
-  void modeScrollToBotton() {
+  Future<void> moveScrollToBottom() async {
+    await Future.delayed(const Duration(milliseconds: 100));
+
     chatScrollController.animateTo(
         chatScrollController.position.maxScrollExtent,
         duration: const Duration(milliseconds: 300),
